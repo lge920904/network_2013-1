@@ -1,5 +1,6 @@
 package kr.ac.mju.oos.ui.panels.game;
 
+import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.JLabel;
@@ -21,6 +22,7 @@ public class PlayerListPanel extends JPanel {
 		// 나머지도 채우세요
 		this.setPreferredSize(new Dimension(Constants.PANELS_PLAYER_WIDTH,
 				Constants.PANELS_BOTTOM_HEIGHT));
+		this.setBackground(Color.RED);
 		this.add(new JLabel(location));
 	}
 }
