@@ -12,8 +12,7 @@ public class Constants {
 	public static final int PANELS_CANVAS_HEIGHT = 520;
 	// 값 미정 많음
 	public static final int PANELS_BOTTOM_HEIGHT = 218;
-	public static final int PANELS_CHAT_WIDTH = 500; // 값 미정
+	public static final int PANELS_CHAT_WIDTH = 500; 
 	public static final int PANELS_PLAYER_WIDTH = 220;
-	
 
 }

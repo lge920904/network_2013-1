@@ -19,5 +19,6 @@ public class ToolboxPanel extends JPanel {
 		this.setPreferredSize(new Dimension(Constants.FRAMES_MAIN_WIDTH,
 				Constants.PANELS_TOOLBOX_HEIGHT)); // Constants에서 툴박스 크기 조정 하세요
 		this.add(new JLabel("Toolbox")); // 이 밑으로 추가
+//		this.setPreferredSize(new Dimension(width, height))
 	}
 }

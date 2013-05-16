@@ -17,8 +17,7 @@ public class ChatText extends JPanel{
 		enterBtn.addActionListener(new ChatHandler());
 		this.add(new JTextField(textFieldWidth));
 		this.add(enterBtn);
-		this.setSize(Constants.PANELS_CHAT_WIDTH,20);
-		
+		this.setSize(Constants.PANELS_CHAT_WIDTH,20);		
 	}
 }
 class ChatHandler implements ActionListener{
