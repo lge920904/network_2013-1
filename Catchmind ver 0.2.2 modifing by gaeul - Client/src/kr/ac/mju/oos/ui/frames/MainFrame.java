@@ -15,10 +15,11 @@ public class MainFrame extends JFrame {
 	private MainPanel mainPanel;
 	private AudioManager audioManager;
 	public MainFrame() {
-		// TODO Auto-generated constructor stub
 		super();
+		audioManager = new AudioManager();
+		audioManager.selectMusic(this);
 	}
-
+	
 	public void init() {
 
 		Dimension frame;
@@ -35,9 +36,6 @@ public class MainFrame extends JFrame {
 
 		mainPanel.init();
 		
-		//background music start
-		audioManager = new AudioManager();
-
 		this.setResizable(false);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
