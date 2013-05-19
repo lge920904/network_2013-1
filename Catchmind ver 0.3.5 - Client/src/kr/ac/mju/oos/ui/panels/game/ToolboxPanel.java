@@ -130,7 +130,8 @@ public class ToolboxPanel extends JPanel implements ActionListener {
 
 	public void init(DrawingTool drawTool) {
 		this.setPreferredSize(new Dimension(Constants.FRAMES_MAIN_WIDTH,
-				Constants.PANELS_TOOLBOX_HEIGHT)); // Constants���� ��ڽ� ũ��
+				Constants.PANELS_TOOLBOX_HEIGHT));
+		btn_eraser.addActionListener(this);// Constants���� ��ڽ� ũ��
 													// ���� �ϼ���
 		// this.add(new JLabel("Toolbox")); // �� ������ �߰�
 
@@ -277,7 +278,9 @@ public class ToolboxPanel extends JPanel implements ActionListener {
 			// CanvasPanel.pointSize = 23;
 		} else if (e.getSource() == btn_new) {
 			drawTool.clear();
-		}
+		}else if (e.getSource() == btn_eraser) {
+			   drawTool.setColor(Constants.DEFAULT_BACKGROUND_COLOR);
+		  }
 
 	}
 }
