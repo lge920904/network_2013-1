@@ -99,7 +99,6 @@ public class LoginDialog extends JDialog implements ActionListener, KeyListener 
 		contentPanel.addKeyListener(this);
 		idField.addKeyListener(this);
 		pwField.addKeyListener(this);
-
 		// set size, location
 		Dimension frame;
 		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
@@ -130,23 +129,17 @@ public class LoginDialog extends JDialog implements ActionListener, KeyListener 
 		}
 	}
 
-	@Override
 	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
 		if (e.getKeyChar() == KeyEvent.VK_ENTER) {
 			confirm.doClick();
+			audioManager.buttonSound();
+			System.out.println("buttonclick");
+		}else if(e.getKeyChar() == KeyEvent.VK_ESCAPE){
+			audioManager.stopMusic();
 		}
 	}
-
-	@Override
 	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-
 	}
-
-	@Override
 	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
 	}
-
 }

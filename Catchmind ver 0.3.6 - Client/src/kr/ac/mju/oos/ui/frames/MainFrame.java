@@ -2,6 +2,8 @@ package kr.ac.mju.oos.ui.frames;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 import javax.swing.JFrame;
 
@@ -9,13 +11,11 @@ import kr.ac.mju.oos.constants.Constants;
 import kr.ac.mju.oos.ui.main.AudioManager;
 import kr.ac.mju.oos.ui.panels.game.MainPanel;
 
-public class MainFrame extends JFrame {
+public class MainFrame extends JFrame{
 	private static final long serialVersionUID = 1L;
 	private AudioManager audioManager;
 	private MainPanel mainPanel;
-
 	public MainFrame() {
-		// TODO Auto-generated constructor stub
 		super();
 	}
 
@@ -34,12 +34,10 @@ public class MainFrame extends JFrame {
 
 		mainPanel = new MainPanel();
 		this.add(mainPanel);
-
-		mainPanel.init();
+		mainPanel.init(audioManager);
 
 		this.setResizable(false);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
 	}
-
 }

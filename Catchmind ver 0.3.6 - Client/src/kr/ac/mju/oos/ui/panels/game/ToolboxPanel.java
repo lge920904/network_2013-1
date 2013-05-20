@@ -16,10 +16,13 @@ import javax.swing.border.EmptyBorder;
 
 import kr.ac.mju.oos.constants.Constants;
 import kr.ac.mju.oos.uility.DrawingTool;
+import kr.ac.mju.oos.uility.Setting;
 
 public class ToolboxPanel extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 1L;
-
+//	private Setting setting;
+	private JButton option;
+	private int th1,th2,th3,th4,th5;
 	JPanel center_Pn, color_Pn; // 패널생성
 
 	// bin folder 밑에 image file 불러오기
@@ -82,20 +85,23 @@ public class ToolboxPanel extends JPanel implements ActionListener {
 	private DrawingTool drawTool;
 
 	private Label lb_color = new Label("     Colors", Label.LEFT); // colors 글씨
-																	// 라벨 만들기
+	// 라벨 만들기
 
 	private JButton btn_new = new JButton("C L E A R"); // 캔버스초기화 버튼
-
+	private Setting setting;
 	public ToolboxPanel() {
-		// TODO Auto-generated constructor stub
+		th1=3; th2=10; th3=20; th4=35; th5=50;
+		option = new JButton("Option");
+		setting = new Setting(this);
 
 		this.add(center_Pn = new JPanel(new BorderLayout()));// 가운데에 사진과 색선택 버튼을
-																// 올리기 위한 panel
+		// 올리기 위한 panel
 		center_Pn.add(color_Pn = new JPanel(), BorderLayout.CENTER);// 좌측에 색상버튼을
-																	// 올리기 위한
-																	// panel
+		// 올리기 위한
+		// panel
 		center_Pn.setBackground(Color.white); // 배경 흰색으로
-
+		option.addActionListener(this);
+		color_Pn.add(option);
 		color_Pn.add(lb_thick); // 선굴기 글씨 산입
 
 		// 선굵기 버튼 산입
@@ -105,7 +111,14 @@ public class ToolboxPanel extends JPanel implements ActionListener {
 		color_Pn.add(btn_3);
 		color_Pn.add(btn_4);
 		color_Pn.add(btn_5);
-
+		
+		//setting
+		setting.setThick(btn_1);
+		setting.setThick(btn_2);
+		setting.setThick(btn_3);
+		setting.setThick(btn_4);
+		setting.setThick(btn_5);
+		
 		color_Pn.add(lb_color); // color 글씨 산입
 
 		// color 버튼 산입
@@ -132,7 +145,7 @@ public class ToolboxPanel extends JPanel implements ActionListener {
 		this.setPreferredSize(new Dimension(Constants.FRAMES_MAIN_WIDTH,
 				Constants.PANELS_TOOLBOX_HEIGHT));
 		btn_eraser.addActionListener(this);// Constants���� ��ڽ� ũ��
-													// ���� �ϼ���
+		// ���� �ϼ���
 		// this.add(new JLabel("Toolbox")); // �� ������ �߰�
 
 		this.drawTool = drawTool;
@@ -231,10 +244,23 @@ public class ToolboxPanel extends JPanel implements ActionListener {
 		btn_new.addActionListener(this);
 		this.btn_black.doClick();
 		this.btn_1.doClick();
+		
+	}
+	public void setBrushSize(JToggleButton toggleButton, int size){
+		if(toggleButton == btn_1){
+			th1=size;
+		}else if(toggleButton == btn_2){
+			th2=size;
+		}else if(toggleButton == btn_3){
+			th3=size;
+		}else if(toggleButton == btn_4){
+			th4=size;
+		}else if(toggleButton == btn_5){
+			th5=size;
+		}
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		System.out.println(e.getActionCommand());
 		if (e.getSource() == btn_black) {
 			drawTool.setColor(Color.BLACK);
 		} else if (e.getSource() == btn_darkgray) {
@@ -261,26 +287,24 @@ public class ToolboxPanel extends JPanel implements ActionListener {
 			drawTool.setColor(Color.MAGENTA);
 		} else if (e.getSource() == btn_white) {
 			drawTool.setColor(Color.WHITE);
+			
+			//brush size
 		} else if (e.getSource() == btn_1) {
-			drawTool.setStroke(1);
-			// CanvasPanel.pointSize = 4;
+			drawTool.setStroke(th1);
 		} else if (e.getSource() == btn_2) {
-			drawTool.setStroke(2);
-			// CanvasPanel.pointSize = 9;
+			drawTool.setStroke(th2);
 		} else if (e.getSource() == btn_3) {
-			drawTool.setStroke(3);
-			// CanvasPanel.pointSize = 13;
+			drawTool.setStroke(th3);
 		} else if (e.getSource() == btn_4) {
-			drawTool.setStroke(4);
-			// CanvasPanel.pointSize = 18;
+			drawTool.setStroke(th4);
 		} else if (e.getSource() == btn_5) {
-			drawTool.setStroke(5);
-			// CanvasPanel.pointSize = 23;
+			drawTool.setStroke(th5);
 		} else if (e.getSource() == btn_new) {
 			drawTool.clear();
 		}else if (e.getSource() == btn_eraser) {
-			   drawTool.setColor(Constants.DEFAULT_BACKGROUND_COLOR);
-		  }
-
+			drawTool.setColor(Constants.DEFAULT_BACKGROUND_COLOR);
+		}else if(e.getSource() == option){
+			setting.optionVisible();
+		}
 	}
 }

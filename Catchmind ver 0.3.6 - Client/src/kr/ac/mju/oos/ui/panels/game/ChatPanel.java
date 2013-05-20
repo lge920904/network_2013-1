@@ -31,9 +31,6 @@ public class ChatPanel extends JPanel {
 		this.setSize(Constants.PANELS_CHAT_WIDTH,
 				Constants.PANELS_BOTTOM_HEIGHT);
 
-		// setField();
-		// setArea();
-		// setField
 		textField = new JTextField(Constants.PANELS_CHAT_TEXTFIELD_WIDTH);
 		textField.addActionListener(new ChatHandler(textField));
 		this.add(textField, BorderLayout.SOUTH);

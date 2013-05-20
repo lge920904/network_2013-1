@@ -37,6 +37,15 @@ public class Constants {
 	public static final int PANELS_CHAT_TEXTAREA_WIDTH = 10;
 	public static final int PANELS_CHAT_TEXTAREA_HEIGHT = 50;
 
+	// Toolbar
+	public static final int BRUSH_NUMBER = 5;
+
+	// Setting
+	public static final int SETTING_X = 230;
+	public static final int SETTING_Y = 290;
+	public static final int SETTING_WIDTH = 400;
+	public static final int SETTING_HEIGHT = 500;
+
 	// Graphics
 	public static final int DEFAULT_STROKE_SIZE = 1;
 	public static final Color DEFAULT_STROKE_COLOR = Color.BLACK;
@@ -46,7 +55,7 @@ public class Constants {
 	public static enum AUDIO_PLAYLIST {
 		login("login", "background_music/login.mid"), wait("wait",
 				"background_music/wait.mid"), game("game",
-				"background_music/game.mid");
+						"background_music/game.mid");
 
 		private String title;
 		private String url;
@@ -55,13 +64,13 @@ public class Constants {
 			this.title = title;
 			this.url = url;
 		}
-
 		public String getAudio_Title() {
 			return title;
 		}
-
 		public String getAudio_Url() {
 			return url;
 		}
 	};
+
+
 }
