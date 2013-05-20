@@ -38,7 +38,7 @@ public class PlayerListPanel extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == button1 || e.getSource() == button2
 				|| e.getSource() == button3) {
-			pld = new PlayerListDialog(e.getActionCommand() + "사용자 정보");// 아직
+			pld = new PlayerListDialog(e.getActionCommand() + "사용자 정보","id","rating");// 아직
 																		// 미완성
 		}
 	}
