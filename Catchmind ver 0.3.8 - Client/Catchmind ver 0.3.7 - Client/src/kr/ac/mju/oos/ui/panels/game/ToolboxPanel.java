@@ -259,6 +259,7 @@ public class ToolboxPanel extends JPanel implements ActionListener {
 		}else if(toggleButton == btn_5){
 			th5=size;
 		}
+		drawTool.setStroke(size);
 	}
 
 	public void actionPerformed(ActionEvent e) {
