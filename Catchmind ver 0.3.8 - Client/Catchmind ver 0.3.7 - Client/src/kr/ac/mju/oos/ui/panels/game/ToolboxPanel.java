@@ -89,6 +89,7 @@ public class ToolboxPanel extends JPanel implements ActionListener {
 
 	private JButton btn_new = new JButton("C L E A R"); // 캔버스초기화 버튼
 	private Setting setting;
+	
 	public ToolboxPanel() {
 		th1=3; th2=10; th3=20; th4=35; th5=50;
 		option = new JButton("Option");
