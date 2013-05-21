@@ -1,7 +1,11 @@
 package kr.ac.mju.oos.ui.main;
 
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+
 import kr.ac.mju.oos.ui.dialogs.LoginDialog;
 import kr.ac.mju.oos.ui.frames.MainFrame;
+import kr.ac.mju.oos.ui.panels.game.MainPanel;
 
 public class Launcher {
 	private LoginDialog loginDialog;

@@ -1,15 +1,15 @@
 package kr.ac.mju.oos.ui.main;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.sound.midi.MidiChannel;
 import javax.sound.midi.MidiSystem;
 import javax.sound.midi.Sequencer;
+import javax.sound.midi.Synthesizer;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import javax.sound.sampled.UnsupportedAudioFileException;
 
 import kr.ac.mju.oos.constants.Constants.AUDIO_PLAYLIST;
 import kr.ac.mju.oos.ui.dialogs.LoginDialog;
@@ -57,9 +57,23 @@ public class AudioManager {
 		try {
 			sequencer = MidiSystem.getSequencer();
 			sequencer.setSequence(MidiSystem.getSequence(file));
-			sequencer.open();
+			sequencer.open(); 
 			sequencer.setLoopCount(Sequencer.LOOP_CONTINUOUSLY);
 			sequencer.start();
+			
+		/*	 Sequencer sequencer2 = MidiSystem.getSequencer();
+			    sequencer2.open();
+			    if (sequencer2 instanceof Synthesizer) {
+			      Synthesizer synthesizer = (Synthesizer) sequencer2;
+			      MidiChannel[] channels = synthesizer.getChannels();
+
+			      // gain is a value between 0 and 1 (loudest)
+			      double gain = 0.9D;
+			      for (int i = 0; i < channels.length; i++) {
+			        channels[i].controlChange(7, (int) (gain * 127.0));
+			      }
+			    }
+			*/
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -67,7 +81,7 @@ public class AudioManager {
 
 	public void buttonSound(){
 		try {
-			audioInputStream = AudioSystem.getAudioInputStream(file_ArrayList.get(1).getAbsoluteFile());
+			audioInputStream = AudioSystem.getAudioInputStream(new File("./background_music/clicksound.wav"));
 			clip = AudioSystem.getClip();
 			clip.open(audioInputStream);
 			clip.start();
@@ -75,4 +89,5 @@ public class AudioManager {
 			e.printStackTrace();
 		}
 	}
+	
 }
