@@ -28,7 +28,6 @@ public class AudioManager {
 		for(AUDIO_PLAYLIST playlist : AUDIO_PLAYLIST.values()){
 			file = new File(playlist.getAudio_Url());
 			file_ArrayList.add(file);
-			System.out.println(file_ArrayList.get(0));
 		}
 	}
 
@@ -65,7 +64,6 @@ public class AudioManager {
 			e.printStackTrace();
 		}
 	}
-
 	public void buttonSound(){
 		try {
 			audioInputStream = AudioSystem.getAudioInputStream(file_ArrayList.get(1).getAbsoluteFile());
