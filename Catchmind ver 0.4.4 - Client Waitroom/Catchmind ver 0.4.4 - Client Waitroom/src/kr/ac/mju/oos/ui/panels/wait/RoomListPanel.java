@@ -1,4 +1,4 @@
-package kr.ac.mju.oos.ui.panels.wait;
+﻿package kr.ac.mju.oos.ui.panels.wait;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -82,19 +82,19 @@ public class RoomListPanel extends JPanel implements ActionListener{
 	
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == prev){
-			for(int i=1; i<totalPageNum; i++){
-				pageList.get(i).setVisible(false);
-			}
 			if( currentPageNum > 1){
+				for(int i=1; i<totalPageNum; i++){
+					pageList.get(i).setVisible(false);
+				}
 				currentPageNum --;
 				pageList.get(currentPageNum-1).setVisible(true);
 				System.out.println("현재 페이지 : "+currentPageNum);
 			}
 		}else if(e.getSource() == next){
-			for(int i=0; i<totalPageNum; i++){
-				pageList.get(i).setVisible(false);
-			}
 			if( currentPageNum < totalPageNum){
+				for(int i=0; i<totalPageNum; i++){
+					pageList.get(i).setVisible(false);
+				}
 				currentPageNum ++;
 				pageList.get(currentPageNum-1).setVisible(true);
 				System.out.println("현재 페이지 : "+currentPageNum);
