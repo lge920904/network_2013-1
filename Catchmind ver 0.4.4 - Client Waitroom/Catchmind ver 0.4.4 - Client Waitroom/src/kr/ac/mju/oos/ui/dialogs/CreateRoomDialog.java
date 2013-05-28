@@ -76,6 +76,9 @@ public class CreateRoomDialog extends JDialog implements ActionListener,
 		single = new JRadioButton("개인전", true);
 		multi = new JRadioButton("팀전");
 
+		single.setActionCommand("개인전");
+		multi.setActionCommand("단체전");
+		
 		modeGroup = new ButtonGroup();
 		modeGroup.add(single);
 		modeGroup.add(multi);
@@ -83,6 +86,9 @@ public class CreateRoomDialog extends JDialog implements ActionListener,
 		item = new JRadioButton("아이템전");
 		noItem = new JRadioButton("노템전", true);
 
+		item.setActionCommand("아이템전");
+		noItem.setActionCommand("노템전");
+		
 		itemGroup = new ButtonGroup();
 		itemGroup.add(item);
 		itemGroup.add(noItem);
