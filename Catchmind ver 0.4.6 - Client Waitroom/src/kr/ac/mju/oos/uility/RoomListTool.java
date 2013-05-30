@@ -14,14 +14,8 @@ public class RoomListTool implements Tool {
 	private RoomListPanel roomListPanel;
 
 	private ArrayList<JPanel> roomList;
-
+	private Room room;
 	private int totalRoomNum;
-
-	private JLabel roomName;
-	private JLabel gameMode;
-	private JLabel itemMode;
-	private Object secret;
-	private JLabel person;
 	
 	public RoomListTool(RoomListPanel roomListPanel) {
 		this.roomListPanel = roomListPanel;
@@ -32,70 +26,11 @@ public class RoomListTool implements Tool {
 
 	public void setRoomInfo(String roomName, String gameMode, String itemMode,
 			Object secret, Object person) {
-		this.roomName = new JLabel(" room name : " + roomName);
-		this.roomName.setName(roomName);
-		this.gameMode = new JLabel(" game mode : " + gameMode);
-		this.gameMode.setName(gameMode);
-		this.itemMode = new JLabel(" item mode : " + itemMode);
-		this.itemMode.setName(itemMode);
-		this.person = new JLabel(" person : " + (String) person);
-		this.person.setName((String) person);
-
-		this.secret = secret;
-		this.createRoom();
-	}
-
-	public String getRoomName() {
-		return roomName.getName();
-	}
-
-	public String getGameMode() {
-		return gameMode.getName();
-	}
-
-	public String getItemMode() {
-		return itemMode.getName();
-	}
-
-	public Object getSecret() {
-		return secret;
-	}
-
-	public String getPerson() {
-		return person.getName();
-	}
-
-	public void createRoom() {
-		JPanel room = new JPanel();
-
-		room.setPreferredSize(new Dimension(Constants.PANELS_ROOM_WIDTH,
-				Constants.PANELS_ROOM_HEIGHT));
-		room.setLayout(new GridLayout(4, 1, 1, 1));
-
-		room.add(roomName);
-		room.add(gameMode);
-		room.add(itemMode);
-		room.add(person);
-
-		if (secret.equals("비공개")) {
-			room.setBackground(Color.RED);
-		} else if (secret.equals("공개")) {
-			room.setBackground(Color.GREEN);
-		}
-
-		totalRoomNum++;
+		room = new Room(roomName, gameMode, itemMode, secret, person);
+		room.setRoomInfo();
 		roomList.add(room);
+		totalRoomNum++;
 		roomListPanel.addRoom(room, totalRoomNum);
-
-		// 방 정보
-		System.out.println(roomList.get(totalRoomNum - 1).getComponent(0)
-				.getName()); // room name
-		System.out.println(roomList.get(totalRoomNum - 1).getComponent(1)
-				.getName()); // game mode
-		System.out.println(roomList.get(totalRoomNum - 1).getComponent(2)
-				.getName()); // item mode
-		System.out.println(roomList.get(totalRoomNum - 1).getComponent(3)
-				.getName()); // person
 	}
 
 	public void showAllRoom() {
