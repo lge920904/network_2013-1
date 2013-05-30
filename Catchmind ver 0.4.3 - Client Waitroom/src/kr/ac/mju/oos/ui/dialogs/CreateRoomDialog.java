@@ -43,6 +43,9 @@ public class CreateRoomDialog extends JDialog implements ActionListener,
 	private JButton confirm;
 	private JButton exit;
 
+	private ButtonGroup modeGroup;
+	private ButtonGroup itemGroup;
+	
 	private JRadioButton single, multi;
 	private JRadioButton item, noItem;
 
@@ -71,16 +74,20 @@ public class CreateRoomDialog extends JDialog implements ActionListener,
 		RoomPasswordField = new JTextField();
 
 		single = new JRadioButton("개인전", true);
+		single.setActionCommand("개인전");
 		multi = new JRadioButton("팀전");
+		multi.setActionCommand("팀전");
 
-		ButtonGroup modeGroup = new ButtonGroup();
+	modeGroup = new ButtonGroup();
 		modeGroup.add(single);
 		modeGroup.add(multi);
 
 		item = new JRadioButton("아이템전");
+		item.setActionCommand("아이템전");
 		noItem = new JRadioButton("노템전", true);
-
-		ButtonGroup itemGroup = new ButtonGroup();
+		noItem.setActionCommand("노템전");
+		
+		itemGroup = new ButtonGroup();
 		itemGroup.add(item);
 		itemGroup.add(noItem);
 
@@ -92,7 +99,6 @@ public class CreateRoomDialog extends JDialog implements ActionListener,
 	}
 
 	private void init() {
-		// TODO Auto-generated method stub
 
 		// add component
 		Dimension labelDimension = new Dimension(100, 22);
@@ -165,9 +171,12 @@ public class CreateRoomDialog extends JDialog implements ActionListener,
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
 		if (e.getActionCommand().equals(Constants.DIALOG_CREATEROOM_CONFIRM)) {
-			roomListPanel.createRoom(RoomNameField.getText());
+			roomListPanel.createRoom(RoomNameField.getText(), 
+					modeGroup.getSelection().getActionCommand(),
+					itemGroup.getSelection().getActionCommand(),
+					secret.getSelectedItem());
+			System.out.println(modeGroup.getSelection().getActionCommand());
 			this.setVisible(false);
 		} else if (e.getActionCommand().equals(
 				Constants.DIALOG_CREATEROOM_CANCEL)) {

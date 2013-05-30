@@ -6,7 +6,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Enumeration;
 
+import javax.swing.AbstractButton;
+import javax.swing.ButtonModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -63,9 +66,10 @@ public class RoomListPanel extends JPanel implements ActionListener, KeyListener
 		this.add(page, BorderLayout.CENTER);
 		this.add(pageButtonPanel, BorderLayout.SOUTH);
 	}
-	public void createRoom(String roomName){
-		page = roomListTool.createRoom(roomName);
+	public void createRoom(String roomName, String gameMode, String itemMode, Object scret){
+		page = roomListTool.createRoom(roomName,gameMode,itemMode,scret);
 		repaint();
+		this.add(page, BorderLayout.CENTER);
 	}
 	
 	public void keyTyped(KeyEvent e) {
