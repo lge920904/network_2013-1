@@ -8,7 +8,6 @@ public class UserDataBean {
 	private String sn1;
 	private String sn2;
 	private String email;
-	private String imageUrl;
 
 	public String getUserid() {
 		return userid;
@@ -56,11 +55,5 @@ public class UserDataBean {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-	public String getImageUrl(){
-		return imageUrl;
-	}
-	public void setImageUrl(String imageUrl){
-		this.imageUrl = imageUrl;
 	}
 }

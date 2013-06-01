@@ -15,16 +15,15 @@ public class Room extends JPanel{
 	private JLabel itemMode;
 	private Object secret;
 	private JLabel person;
-	private String RoomPassword;
 
 	public Room(String roomName, String gameMode, String itemMode,
-			Object secret, Object person, String roomPassword){
-
+			Object secret, Object person){
+		
 		super();
 		this.setPreferredSize(new Dimension(Constants.PANELS_ROOM_WIDTH,
 				Constants.PANELS_ROOM_HEIGHT));
 		this.setLayout(new GridLayout(4, 1, 1, 1));
-
+		
 		this.roomName = new JLabel(" room name : " + roomName);
 		this.roomName.setName(roomName);
 		this.gameMode = new JLabel(" game mode : " + gameMode);
@@ -34,9 +33,9 @@ public class Room extends JPanel{
 		this.person = new JLabel(" person : " + (String) person);
 		this.person.setName((String) person);
 		this.secret = secret;
-		this.RoomPassword = roomPassword;
+		
 	}
-
+	
 	public void setRoomInfo() {		
 		this.add(roomName);
 		this.add(gameMode);
@@ -48,7 +47,7 @@ public class Room extends JPanel{
 			this.setBackground(Color.GREEN);
 		}
 	}
-
+	
 	public String getRoomName() {
 		return roomName.getName();
 	}
@@ -68,7 +67,5 @@ public class Room extends JPanel{
 	public String getPerson() {
 		return person.getName();
 	}
-	public String roomPassword(){
-		return RoomPassword;
-	}
+
 }

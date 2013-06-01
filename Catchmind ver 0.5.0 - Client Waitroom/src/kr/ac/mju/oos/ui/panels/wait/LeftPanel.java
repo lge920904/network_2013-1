@@ -6,7 +6,6 @@ import java.awt.Dimension;
 import javax.swing.JPanel;
 
 import kr.ac.mju.oos.constants.Constants;
-import kr.ac.mju.oos.uility.GameModeChanger;
 import kr.ac.mju.oos.uility.RoomListTool;
 
 public class LeftPanel extends JPanel {
@@ -14,7 +13,7 @@ public class LeftPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private MenuPanel menuPanel;
 	private RoomListPanel roomListPanel;
-	private RoomListTool roomListTool;
+ 	private RoomListTool roomListTool;
 
 	public LeftPanel() {
 		// TODO Auto-generated constructor stub
@@ -23,7 +22,7 @@ public class LeftPanel extends JPanel {
 		menuPanel = new MenuPanel(roomListTool);
 	}
 
-	public void init(GameModeChanger gameModeChanger) {
+	public void init() {
 		this.setPreferredSize(new Dimension(Constants.PANELS_LEFT_WIDTH,
 				Constants.FRAMES_MAIN_HEIGHT));
 		this.setLayout(new BorderLayout());
@@ -31,7 +30,7 @@ public class LeftPanel extends JPanel {
 		this.add(menuPanel, BorderLayout.NORTH);
 		this.add(roomListPanel, BorderLayout.CENTER);
 
-		menuPanel.init(gameModeChanger);
-		roomListPanel.init(gameModeChanger);
+		menuPanel.init();
+		roomListPanel.init();
 	}
 }

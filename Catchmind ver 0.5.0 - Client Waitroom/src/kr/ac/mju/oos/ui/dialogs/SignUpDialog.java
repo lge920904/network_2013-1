@@ -11,7 +11,6 @@ import java.awt.event.KeyListener;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -23,7 +22,7 @@ import kr.ac.mju.oos.model.dao.UserManager;
 import kr.ac.mju.oos.model.dto.UserDataBean;
 
 public class SignUpDialog extends JDialog implements ActionListener,
-KeyListener {
+		KeyListener {
 
 	private UserManager userDB;
 
@@ -38,7 +37,6 @@ KeyListener {
 	private JLabel snLabel;
 	private JLabel lineLabel;
 	private JLabel emailLabel;
-	private JLabel imageLabel;
 
 	private JTextField idField;
 	private JPasswordField pwField;
@@ -50,9 +48,6 @@ KeyListener {
 
 	private JButton confirm;
 	private JButton exit;
-	private JButton imageButton;
-
-	private JFileChooser chooser;
 
 	public SignUpDialog() {
 
@@ -68,11 +63,9 @@ KeyListener {
 		snLabel = new JLabel(Constants.DIALOG_SIGNUP_SERIALNUMBER);
 		lineLabel = new JLabel(Constants.DIALOG_SIGNUP_LINE);
 		emailLabel = new JLabel(Constants.DIALOG_SIGNUP_EMAIL);
-		imageLabel = new JLabel(Constants.DIALOG_SIGNUP_IMAGE);
 
 		confirm = new JButton(Constants.DIALOG_SIGNUP_CONFIRM);
 		exit = new JButton(Constants.DIALOG_SIGNUP_CANCEL);
-		imageButton = new JButton(Constants.DIALOG_SIGNUP_SEARCH);
 
 		idField = new JTextField();
 		pwField = new JPasswordField();
@@ -88,6 +81,7 @@ KeyListener {
 	}
 
 	private void init() {
+		// TODO Auto-generated method stub
 
 		// add component
 		Dimension slabelDimension = new Dimension(10, 22);
@@ -102,7 +96,7 @@ KeyListener {
 		contentPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 3, 3));
 		borderPanel.add(contentPanel);
 
-		titleImgLabel = new JLabel("회원가입");
+		titleImgLabel = new JLabel();
 		titleImgLabel.setPreferredSize(new Dimension(200, 30));
 		contentPanel.add(titleImgLabel);
 
@@ -121,20 +115,11 @@ KeyListener {
 		sn2Field.setPreferredSize(serialDimension);
 		emailLabel.setPreferredSize(labelDimension);
 		emailField.setPreferredSize(inputDimension);
-		imageLabel.setPreferredSize(labelDimension);
-
-		contentPanel.addKeyListener(this);
-		idField.addKeyListener(this);
-		pwField.addKeyListener(this);
-		pwcheckField.addKeyListener(this);
-		nameField.addKeyListener(this);
 
 		confirm.setPreferredSize(btnDimension);
 		confirm.addActionListener(this);
 		exit.setPreferredSize(btnDimension);
 		exit.addActionListener(this);
-		imageButton.setPreferredSize(btnDimension);
-		imageButton.addActionListener(this);
 
 		// add label, field, btn
 		contentPanel.add(idLabel);
@@ -151,12 +136,15 @@ KeyListener {
 		contentPanel.add(sn2Field);
 		contentPanel.add(emailLabel);
 		contentPanel.add(emailField);
-		contentPanel.add(imageLabel);
-		contentPanel.add(imageButton);
 
 		contentPanel.add(confirm);
 		contentPanel.add(exit);
 
+		contentPanel.addKeyListener(this);
+		idField.addKeyListener(this);
+		pwField.addKeyListener(this);
+		pwcheckField.addKeyListener(this);
+		nameField.addKeyListener(this);
 		// set size, location
 		Dimension frame;
 		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
@@ -173,33 +161,25 @@ KeyListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		String userid = null;
-		String userpw = null;
-		String userpwcheck = null;
-		String username = null;
-		String usersn1 = null;
-		String usersn2 = null;
-		String useremail = null;
-		String userImageUrl = null;
-		
+		// TODO Auto-generated method stub
+
+		String userid = idField.getText();
+		String userpw = pwField.getText();
+		String userpwcheck = pwcheckField.getText();
+		String username = nameField.getText();
+		String usersn1 = sn1Field.getText();
+		String usersn2 = sn2Field.getText();
+		String useremail = emailField.getText();
+
+		UserDataBean user = new UserDataBean();
+		user.setUserid(userid);
+		user.setPassword(userpw);
+		user.setName(username);
+		user.setSn1(usersn1);
+		user.setSn2(usersn2);
+		user.setEmail(useremail);
+
 		if (e.getActionCommand().equals(Constants.DIALOG_SIGNUP_CONFIRM)) {
-			userid = idField.getText();
-			userpw = pwField.getText();
-			userpwcheck = pwcheckField.getText();
-			username = nameField.getText();
-			usersn1 = sn1Field.getText();
-			usersn2 = sn2Field.getText();
-			useremail = emailField.getText();
-
-			UserDataBean user = new UserDataBean();
-			user.setUserid(userid);
-			user.setPassword(userpw);
-			user.setName(username);
-			user.setSn1(usersn1);
-			user.setSn2(usersn2);
-			user.setEmail(useremail);
-			user.setImageUrl(userImageUrl);
-
 			if (userid.equals("")) { // 방제목 미입력시
 				JOptionPane.showMessageDialog(this, "아이디를 입력하세요! ");
 			} else if (userpw.equals("")) {
@@ -218,7 +198,7 @@ KeyListener {
 				JOptionPane.showMessageDialog(this, "이메일을 입력하세요! ");
 			} else {
 				try {
-					//	userDB.insertMember(user);
+				//	userDB.insertMember(user);
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -228,30 +208,24 @@ KeyListener {
 			}
 		} else if (e.getActionCommand().equals(Constants.DIALOG_SIGNUP_CANCEL)) {
 			this.setVisible(false);
-		}else if(e.getActionCommand().equals(Constants.DIALOG_SIGNUP_SEARCH)){
-			chooser = new JFileChooser("C:");
-			for(Constants.IMAGE_FILE_EXTENSION ex : Constants.IMAGE_FILE_EXTENSION.values()){
-				chooser.setFileFilter
-				(new javax.swing.filechooser.FileNameExtensionFilter(ex.name(), ex.name()));
-			}
-			int returnVal = chooser.showDialog(this, "사진선택");
-			if(returnVal==0){
-				userImageUrl = chooser.getSelectedFile().getPath();
-				//	File f = new File(path);
-			}
 		}
 	}
 
 	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
 		if (e.getKeyChar() == KeyEvent.VK_ENTER) {
 			confirm.doClick();
 		}
 	}
 
+	@Override
 	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
 
 	}
 
+	@Override
 	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
 	}
 }

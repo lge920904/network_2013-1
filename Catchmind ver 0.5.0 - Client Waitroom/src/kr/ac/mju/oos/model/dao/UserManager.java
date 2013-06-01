@@ -35,14 +35,13 @@ public class UserManager {
 			conn = DriverManager.getConnection(
 					"jdbc:oracle:thin:@127.0.0.1:1521:xe", "scott", "tiger");
 			pstmt = conn
-					.prepareStatement("INSERT INTO UserTable VALUES (?,?,?,?,?,?,?)");	// 테이블이름 USERTABLE
+					.prepareStatement("INSERT INTO UserTable VALUES (?,?,?,?,?,?)");	// 테이블이름 USERTABLE
 			pstmt.setString(1, user.getUserid());
 			pstmt.setString(2, user.getPassword());
 			pstmt.setString(3, user.getName());
 			pstmt.setString(4, user.getSn1());
 			pstmt.setString(5, user.getSn2());
 			pstmt.setString(6, user.getEmail());
-			pstmt.setString(7, user.getImageUrl());
 			System.out.println("ID : " + user.getUserid() + "   사용자 생성");
 			pstmt.executeUpdate();
 

@@ -7,24 +7,20 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import kr.ac.mju.oos.constants.Constants;
-import kr.ac.mju.oos.ui.panels.game.MainPanel;
-import kr.ac.mju.oos.uility.AudioManager;
-import kr.ac.mju.oos.uility.GameModeChanger;
+import kr.ac.mju.oos.ui.main.AudioManager;
 
 public class MainFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private AudioManager audioManager;
 	// private kr.ac.mju.oos.ui.panels.game.MainPanel mainPanel;
 	private kr.ac.mju.oos.ui.panels.wait.MainPanel mainPanel;
-	private MainPanel gamePanel;
 
 	public MainFrame() {
 		// TODO Auto-generated constructor stub
 		super();
 	}
 
-	public void init(AudioManager audioManager, String userID,
-			GameModeChanger gameModeChanger) {
+	public void init(AudioManager audioManager) {
 
 		Dimension frame;
 		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
@@ -40,16 +36,14 @@ public class MainFrame extends JFrame {
 		mainPanel = new kr.ac.mju.oos.ui.panels.wait.MainPanel();
 		this.add(mainPanel);
 
-		mainPanel.init(gameModeChanger);
+		mainPanel.init();
 
 		this.setResizable(false);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
 
 		this.audioManager = audioManager;
-		audioManager.selectMusic(getPanel());
-		// gamePanel = new MainPanel(); // 나중에 프레임 생성해서 게임할떈 setVisible이용
-		// gamePanel.init();
+		audioManager.selectMusic(this);
 	}
 
 	public JPanel getPanel() {

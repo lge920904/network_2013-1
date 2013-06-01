@@ -12,18 +12,25 @@ import javax.swing.JPanel;
 import kr.ac.mju.oos.constants.Constants;
 import kr.ac.mju.oos.controller.FrontController;
 import kr.ac.mju.oos.ui.dialogs.PlayerListDialog;
+import kr.ac.mju.oos.model.dto.*;
 
 public class PlayerListPanel extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	private String location;
 	private PlayerListDialog pld;
-	ImageIcon player = new ImageIcon("picture/missingAvatar.png");
-	JButton button1 = new JButton(player);
-	JButton button2 = new JButton(player);
-	JButton button3 = new JButton(player);
+	private ImageIcon player;
+	private JButton button1;
+	private JButton button2;
+	private JButton button3;
+	private UserDataBean user;
 
 	public PlayerListPanel(String location) {
 		// TODO Auto-generated constructor stub
+		player = new ImageIcon("picture/missingAvatar.png");
+		button1 = new JButton(player);
+		button2 = new JButton(player);
+		button3 = new JButton(player);
+		user= new UserDataBean();
 		this.location = location;
 		this.setLayout(new GridLayout(3, 1));
 		this.add(button1);
@@ -38,7 +45,7 @@ public class PlayerListPanel extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == button1 || e.getSource() == button2
 				|| e.getSource() == button3) {
-			pld = new PlayerListDialog(e.getActionCommand() + "사용자 정보","id","rating");// 아직
+			pld = new PlayerListDialog(user);// 아직
 																		// 미완성
 		}
 	}

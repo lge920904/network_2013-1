@@ -17,9 +17,8 @@ import javax.swing.JPanel;
 
 import kr.ac.mju.oos.constants.Constants;
 import kr.ac.mju.oos.ui.dialogs.CreateRoomDialog;
-import kr.ac.mju.oos.ui.dialogs.StoreDialog;
 import kr.ac.mju.oos.ui.dialogs.WaitDialog;
-import kr.ac.mju.oos.uility.GameModeChanger;
+import kr.ac.mju.oos.ui.dialogs.StoreDialog;
 import kr.ac.mju.oos.uility.RoomListTool;
 
 public class MenuPanel extends JPanel implements ActionListener, ItemListener {
@@ -43,8 +42,6 @@ public class MenuPanel extends JPanel implements ActionListener, ItemListener {
 	private Dialog storeDialog;
 	private RoomListTool roomListTool;
 
-	private GameModeChanger gameModeChanger;
-
 	public MenuPanel(RoomListTool roomListTool) {
 		// TODO Auto-generated constructor stub
 
@@ -53,13 +50,12 @@ public class MenuPanel extends JPanel implements ActionListener, ItemListener {
 
 		waitDialog = new WaitDialog();
 		waitDialog.setVisible(false);
-
+		
 		storeDialog = new StoreDialog();
 		storeDialog.setVisible(false);
-		
+
 		statusLabel = new JLabel("방 정렬 : ");
 		statusCombo = new JComboBox(status);
-
 
 		leftPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		leftPanel.setPreferredSize(new Dimension(280, 40));
@@ -76,20 +72,21 @@ public class MenuPanel extends JPanel implements ActionListener, ItemListener {
 
 		this.roomListTool = roomListTool;
 
+
 		cRoom.addActionListener(this);
 		cStart.addActionListener(this);
 		cStore.addActionListener(this);
+		this.init();
 	}
 
-	public void init(GameModeChanger gameModeChanger) {
+	public void init() {
 		this.setPreferredSize(new Dimension(Constants.FRAMES_MAIN_WIDTH,
 				Constants.PANELS_MENU_HEIGHT));
+
 		this.add(leftPanel, BorderLayout.WEST);
 		this.add(centerPanel, BorderLayout.CENTER);
 		this.add(rightPanel, BorderLayout.EAST);
 
-		this.gameModeChanger = gameModeChanger;
-		this.roomListTool.setGameModeChanger(gameModeChanger);
 		statusCombo.addItemListener(this);
 	}
 

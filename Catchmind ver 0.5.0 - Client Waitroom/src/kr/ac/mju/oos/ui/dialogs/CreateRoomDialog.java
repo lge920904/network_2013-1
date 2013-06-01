@@ -22,9 +22,9 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 import kr.ac.mju.oos.constants.Constants;
+import kr.ac.mju.oos.uility.RoomListTool;
 import kr.ac.mju.oos.model.dao.RoomManager;
 import kr.ac.mju.oos.model.dto.RoomDataBean;
-import kr.ac.mju.oos.uility.RoomListTool;
 
 public class CreateRoomDialog extends JDialog implements ActionListener,
 		ItemListener, KeyListener {
@@ -220,11 +220,8 @@ public class CreateRoomDialog extends JDialog implements ActionListener,
 				roomListTool.setRoomInfo(RoomNameField.getText(), modeGroup
 						.getSelection().getActionCommand(), itemGroup
 						.getSelection().getActionCommand(), secret
-						.getSelectedItem(), person.getSelectedItem(), RoomPasswordField
-						.getText());
-				System.out.println(RoomPasswordField.getText());
+						.getSelectedItem(), person.getSelectedItem());
 				RoomNameField.setText("");
-				RoomPasswordField.setText("");
 				RoomNameField.requestFocus();
 				this.setVisible(false);
 

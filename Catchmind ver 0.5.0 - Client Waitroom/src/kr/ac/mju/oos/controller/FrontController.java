@@ -13,7 +13,6 @@ import kr.ac.mju.oos.constants.Constants;
 import kr.ac.mju.oos.uility.MessageParser;
 
 public class FrontController {
-	private static FrontController instance = new FrontController();
 
 	private Socket gameSocket;
 	private PrintWriter gameWriter;
@@ -25,20 +24,10 @@ public class FrontController {
 	private PrintWriter chatWriter;
 	private ObjectInputStream chatInputStream;
 
-	private Socket waitSocket;
-	private BufferedReader waitReader;
-	private PrintWriter waitWriter;
-	private ObjectInputStream waitInputStream;
-
 	private CanvasController canvasController;
 	private ChatController chatController;
-	private WaitController waitController;
 
-	public static FrontController getInstance() {
-		return instance;
-	}
-
-	private FrontController() {
+	public FrontController() {
 		try {
 			gameSocket = new Socket("localhost", Constants.GAME_PORT_NUMBER);
 			gameWriter = new PrintWriter(new OutputStreamWriter(
@@ -52,16 +41,9 @@ public class FrontController {
 			chatReader = new BufferedReader(new InputStreamReader(
 					chatSocket.getInputStream()));
 
-			waitSocket = new Socket("localhost", Constants.WAIT_PORT_NUMBER);
-			waitWriter = new PrintWriter(new OutputStreamWriter(
-					waitSocket.getOutputStream()));
-			waitReader = new BufferedReader(new InputStreamReader(
-					waitSocket.getInputStream()));
-
 			objectInputStream = new ObjectInputStream(
 					gameSocket.getInputStream());
 			chatInputStream = new ObjectInputStream(chatSocket.getInputStream());
-			waitInputStream = new ObjectInputStream(waitSocket.getInputStream());
 		} catch (Exception e) {
 			// TODO: handle exception
 			System.out.println("FrontController Construction Error");
@@ -76,12 +58,10 @@ public class FrontController {
 
 		Thread gameThread = new Thread(new DrawReceiveThread());
 		Thread chatThread = new Thread(new ChatReceiveThread());
-		Thread waitThread = new Thread(new WaitReceiveThread());
 		// Thread t = new Thread(this);
 		// t.start();
 		gameThread.start();
 		chatThread.start();
-		waitThread.start();
 	}
 
 	// 메세지 보낼때
@@ -104,38 +84,8 @@ public class FrontController {
 			// System.out.println("FrontController SendMsg - " + sendMsg);
 			chatWriter.println(sendMsg);
 			chatWriter.flush();
-		} else if (controllerName.equals("Wait")) {
-			waitWriter.println(sendMsg);
-			waitWriter.flush();
 		}
 		return true;
-	}
-
-	private class WaitReceiveThread implements Runnable {
-
-		@Override
-		public void run() {
-			// TODO Auto-generated method stub
-			while (true) {
-				try {
-					String string = waitInputStream.readObject().toString();
-					System.out
-							.println("In FrontController : receive Message - "
-									+ string);
-					String[] tokens = string.split(":");
-					System.out.println(tokens[0]);
-					if (tokens[0].equals("Wait")) {
-						System.out.println("at FrontController Wait Receive");
-						sendData(new String("Chat:ROOM:CREATE:" + tokens[2]));
-						sendData(new String("Canvas:ROOM:CREATE:" + tokens[2]));
-					}
-				} catch (Exception e) {
-					// TODO: handle exception
-					System.out.println("FrontController Wait Part run Error");
-				}
-			}
-
-		}
 	}
 
 	private class ChatReceiveThread implements Runnable {

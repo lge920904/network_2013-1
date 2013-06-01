@@ -20,7 +20,7 @@ import kr.ac.mju.oos.constants.Constants;
 
 public class ChatPanel extends JPanel{
 	private static final long serialVersionUID = 1L;
-	private TextArea msgView;   // 메시지를 보여주는 영역
+    private TextArea msgView;   // 메시지를 보여주는 영역
 	private TextField sendBox;         // 보낼 메시지를 적는 상자
 	private Socket chatSocket;
 	private PrintWriter chatWriter;
@@ -42,40 +42,43 @@ public class ChatPanel extends JPanel{
 
 	public void init() {
 		this.setPreferredSize(new Dimension(Constants.PANELS_RIGHT_WIDTH,
-				Constants.FRAMES_MAIN_HEIGHT / 2));
-
+				Constants.FRAMES_MAIN_HEIGHT / 2-30));
+		
 		msgView=new TextArea("", 1,1,1);
 		sendBox=new TextField(""); 
-		this.setLayout(new BorderLayout());
-		this.add(msgView,"Center");
-		this.add(sendBox, "South");
-		msgView.setEditable(false);
+	    this.setLayout(new BorderLayout());
+	    this.add(msgView,"Center");
+	    this.add(sendBox, "South");
+	    msgView.setEditable(false);
 		this.add(new JScrollPane(msgView), BorderLayout.CENTER);
-		sendBox.addKeyListener(new ChtListener());
-		setNetworking();
+	    //this.setBounds(480, 300, 250,250);
+	    sendBox.addKeyListener(new ChtListener());
+	    setNetworking();
 		Thread t1 = new Thread(new ChtReader());
 		t1.start();
-
-
+	    
+	    
 	}
-	public void setNetworking(){	
+	public void setNetworking(){	//���� ����
 		try{
 			chatSocket = new Socket("localhost",Constants.WAIT_CHAT_PORT_NUMBER);   //ex) "211.111.111.111"
+			//System.out.println("�ش� ȣ��Ʈ�� �����");
 			InputStreamReader isr = new InputStreamReader(chatSocket.getInputStream());
 			chatReader = new BufferedReader(isr);
 			chatWriter = new PrintWriter(chatSocket.getOutputStream());
+			//System.out.println("���� �����Ϸ�!");
 		}catch(IOException e){
-			e.printStackTrace();
+			System.out.println("���� ����" + e);
 		}
-
+		
 	}
-	class ChtListener implements KeyListener{	
+	class ChtListener implements KeyListener{	//���� �����ͺκ�
 		public void keyPressed(KeyEvent e) {
 			if (e.getKeyChar() == KeyEvent.VK_ENTER) {
-				chatWriter.println(sendBox.getText());
-				chatWriter.flush();
-				sendBox.setText("");
-				sendBox.requestFocus();
+			chatWriter.println(sendBox.getText());
+			chatWriter.flush();
+			sendBox.setText("");
+			sendBox.requestFocus();
 			}
 		}
 		public void keyReleased(KeyEvent e) {
@@ -83,7 +86,7 @@ public class ChatPanel extends JPanel{
 		public void keyTyped(KeyEvent e) {
 		}
 	}
-	class ChtReader implements Runnable{
+	class ChtReader implements Runnable{	//�޽��� �б�
 		String message;
 		public void run(){
 			try{

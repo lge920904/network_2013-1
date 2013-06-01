@@ -3,7 +3,6 @@ package kr.ac.mju.oos.constants;
 import java.awt.Color;
 
 public class Constants {
-	public static final int LOGIN_PORT_NUMBER = 10000;
 	public static final int GAME_PORT_NUMBER = 10001;
 	public static final int CHAT_PORT_NUMBER = 10002;
 	public static final int WAIT_PORT_NUMBER = 10003;
@@ -16,11 +15,11 @@ public class Constants {
 	public static final String DIALOG_LOGIN_CANCEL = "취소";
 	public static final String DIALOG_LOGIN_ID = " ID ";
 	public static final String DIALOG_LOGIN_PASSWORD = " PW ";
-
-	// Store String
+	
+	// Wait string
 	public static final String DIALOG_STORE_NAME = "아이템 상점";
 	public static final String DIALOG_STORE_CANCEL = "취소";
-	
+
 	// Wait string
 	public static final String DIALOG_WAIT_NAME = "게임 찾는중....";
 	public static final String DIALOG_WAIT_CANCEL = "취소";
@@ -29,7 +28,6 @@ public class Constants {
 	public static final String DIALOG_SIGNUP_NAME = " 회원가입 ";
 	public static final String DIALOG_SIGNUP_CONFIRM = "확인";
 	public static final String DIALOG_SIGNUP_CANCEL = "취소";
-	public static final String DIALOG_SIGNUP_SEARCH = "찾기";
 	public static final String DIALOG_SIGNUP_IDCHECK = "중복확인";
 	public static final String DIALOG_SIGNUP_ID = " ID ";
 	public static final String DIALOG_SIGNUP_PASSWORD = " PW ";
@@ -38,7 +36,6 @@ public class Constants {
 	public static final String DIALOG_SIGNUP_SERIALNUMBER = " SERIALNUMBER ";
 	public static final String DIALOG_SIGNUP_LINE = " - ";
 	public static final String DIALOG_SIGNUP_EMAIL = " E-MAIL ";
-	public static final String DIALOG_SIGNUP_IMAGE = "IMAGE";
 
 	// CreateRoom string
 	public static final String DIALOG_CREATEROOM_NAME = "게임방 만들기";
@@ -56,8 +53,8 @@ public class Constants {
 	public static final int DIALOG_LOGIN_HEIGHT = 200;
 	
 	// store dialog
-		public static final int DIALOG_STORE_WIDTH = 600;
-		public static final int DIALOG_STORE_HEIGHT = 400;	
+	public static final int DIALOG_STORE_WIDTH = 600;
+	public static final int DIALOG_STORE_HEIGHT = 400;	
 	
 	// wait dialog
 	public static final int DIALOG_WAIT_WIDTH = 180;
@@ -88,7 +85,7 @@ public class Constants {
 	public static final int PANELS_MAIN_WIDTH = 1024;
 	public static final int PANELS_CHAT_WIDTH = 500;
 	public static final int PANELS_PLAYER_WIDTH = 220;
-	public static final int PANELS_LEFT_WIDTH = 724;
+	public static final int PANELS_LEFT_WIDTH = 714;
 	public static final int PANELS_RIGHT_WIDTH = 300;
 
 	// Toolbar
@@ -116,9 +113,6 @@ public class Constants {
 	public static final Color DEFAULT_STROKE_COLOR = Color.BLACK;
 	public static final Color DEFAULT_BACKGROUND_COLOR = Color.WHITE;
 
-	// user image
-	public static enum IMAGE_FILE_EXTENSION  {bmp, png, jpeg, jpg, jpe};
-	
 	// audio playlist
 	public static enum AUDIO_PLAYLIST {
 		login("login", "background_music/login.mid"), wait("wait",

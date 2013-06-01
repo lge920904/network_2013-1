@@ -9,34 +9,26 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
-import java.net.Socket;
-import java.net.UnknownHostException;
 
+import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import kr.ac.mju.oos.constants.Constants;
-import kr.ac.mju.oos.ui.main.Launcher;
-import kr.ac.mju.oos.uility.AudioManager;
+import kr.ac.mju.oos.ui.main.AudioManager;
+import kr.ac.mju.oos.ui.dialogs.SignUpDialog;
+import kr.ac.mju.oos.ui.tabs.AllInfTab;
 
 public class LoginDialog extends JDialog implements ActionListener, KeyListener {
-	private static final long serialVersionUID = 1L;
 
-	private Socket loginSocket;
-	private PrintWriter loginWriter;
-	private ObjectInputStream loginInputStream;
+	private static final long serialVersionUID = 1L;
 
 	private AudioManager audioManager;
 
-	private Dialog SignUpDialog; // 회원가입 다이어로그추가
+	private Dialog SignUpDialog;	// 회원가입 다이어로그추가
 
 	// Components
 	private JPanel borderPanel;
@@ -48,14 +40,15 @@ public class LoginDialog extends JDialog implements ActionListener, KeyListener 
 
 	private JButton confirm;
 	private JButton exit;
-	private JButton signup; // 회원가입버튼추가
+	private JButton signup;		// 회원가입버튼추가
 
 	private JTextField idField;
 	private JTextField pwField;
-
-	private Launcher launcher;
+	private AllInfTab allinftab;
+	
 
 	public LoginDialog(AudioManager audioManager) {
+		// TODO Auto-generated constructor stub
 		super(new JDialog(), Constants.DIALOG_LOGIN_NAME, true);
 		this.audioManager = audioManager;
 		audioManager.selectMusic(this);
@@ -64,34 +57,24 @@ public class LoginDialog extends JDialog implements ActionListener, KeyListener 
 		pwLabel = new JLabel(Constants.DIALOG_LOGIN_PASSWORD);
 		confirm = new JButton(Constants.DIALOG_LOGIN_CONFIRM);
 		exit = new JButton(Constants.DIALOG_LOGIN_CANCEL);
-		signup = new JButton(Constants.DIALOG_SIGNUP_NAME); // 회원가입버튼 추가
-
-		try {
-			loginSocket = new Socket("localhost", Constants.LOGIN_PORT_NUMBER);
-			loginWriter = new PrintWriter(new OutputStreamWriter(
-					loginSocket.getOutputStream()));
-			loginInputStream = new ObjectInputStream(
-					loginSocket.getInputStream());
-		} catch (UnknownHostException e) {
-			System.out.println("호스트 못찾음");
-		} catch (IOException e) {
-			System.out.println("입력 에러");
-		}
+		signup = new JButton(Constants.DIALOG_SIGNUP_NAME);		// 회원가입버튼 추가
 
 		idField = new JTextField();
 		pwField = new JTextField();
+		allinftab = new AllInfTab();
 
 		this.setLayout(new BorderLayout());
+		this.init();
 	}
 
-	public void init(Launcher launcher) {
+	private void init() {
+		// TODO Auto-generated method stub
 
-		this.launcher = launcher;
 		// add component
 		Dimension labelDimension = new Dimension(40, 22);
 		Dimension inputDimension = new Dimension(120, 22);
 		Dimension btnDimension = new Dimension(80, 22);
-		Dimension longbtnDimension = new Dimension(163, 22); // 회원가입버튼길이추가
+		Dimension longbtnDimension = new Dimension(163, 22);	//회원가입버튼길이추가
 
 		borderPanel = new JPanel(new BorderLayout());
 		this.setContentPane(borderPanel);
@@ -115,12 +98,8 @@ public class LoginDialog extends JDialog implements ActionListener, KeyListener 
 		exit.setPreferredSize(btnDimension);
 		exit.addActionListener(this);
 
-		signup.setPreferredSize(longbtnDimension); // 회원가입크기설정
-		signup.addActionListener(this); // 회원가입액션설정
-
-		contentPanel.addKeyListener(this);
-		idField.addKeyListener(this);
-		pwField.addKeyListener(this);
+		signup.setPreferredSize(longbtnDimension);	//회원가입크기설정 
+		signup.addActionListener(this);				//회원가입액션설정
 
 		// add label, field, btn
 		contentPanel.add(idLabel);
@@ -130,7 +109,12 @@ public class LoginDialog extends JDialog implements ActionListener, KeyListener 
 
 		contentPanel.add(confirm);
 		contentPanel.add(exit);
-		contentPanel.add(signup);
+		contentPanel.add(signup);			//회원가입 버튼추가
+
+		contentPanel.addKeyListener(this);
+		idField.addKeyListener(this);
+		pwField.addKeyListener(this);
+		allinftab.init();
 
 		// set size, location
 		Dimension frame;
@@ -149,31 +133,18 @@ public class LoginDialog extends JDialog implements ActionListener, KeyListener 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		// audioManager.stopMusic(); // 회원가입란 추가에 따른 위치 이동 (아래로)
+		// audioManager.stopMusic();     // 회원가입란 추가에 따른 위치 이동 (아래로)
 		if (e.getActionCommand().equals(Constants.DIALOG_LOGIN_CONFIRM)) {
-			try {
-				audioManager.stopMusic();
-				String id = new String(idField.getText());
-				String pw = new String(pwField.getText());
-				if (id.length() > 4 && pw.length() > 4) {
-					loginWriter.println("login:" + id + ":" + pw);
-					loginWriter.flush();
-					if (loginInputStream.readObject().equals("true")) {
-						this.setVisible(false);
-						launcher.setUserID(id);
-						loginInputStream.close();
-						loginWriter.close();
-						loginSocket.close();
-					}
-				}else{
-					JOptionPane.showMessageDialog(this,"ID 혹은 비밀번호를 모두 입력하세요.");
-				} 
-			} catch (Exception e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+			// get id, pw
+			// System.out.println(e.);
+			audioManager.stopMusic();
+			String id = new String(idField.getText());
+			String pw = new String(pwField.getText());
+			allinftab.goToWaitRoom(id);
 
-		} else if (e.getSource() == signup) { // 회원가입버튼 액션추가
+			this.setVisible(false);
+			
+		} else if (e.getSource() == signup) {		//회원가입버튼 액션추가
 
 			SignUpDialog = new SignUpDialog();
 			this.setVisible(true);
@@ -186,14 +157,15 @@ public class LoginDialog extends JDialog implements ActionListener, KeyListener 
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyChar() == KeyEvent.VK_ENTER) {
 			confirm.doClick();
+			audioManager.buttonSound();
+			System.out.println("buttonclick");
+			
 		}else if(e.getKeyChar() == KeyEvent.VK_ESCAPE){
 			audioManager.stopMusic();
 		}
 	}
-
 	public void keyReleased(KeyEvent e) {
 	}
-
 	public void keyTyped(KeyEvent e) {
 	}
 }

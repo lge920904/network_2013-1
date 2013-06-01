@@ -8,7 +8,6 @@ import javax.swing.JPanel;
 import kr.ac.mju.oos.constants.Constants;
 import kr.ac.mju.oos.controller.ChatController;
 import kr.ac.mju.oos.controller.FrontController;
-import kr.ac.mju.oos.uility.GameModeChanger;
 
 public class MainPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -17,17 +16,16 @@ public class MainPanel extends JPanel {
 	private CanvasPanel canvasPanel; // ĵ����
 	private BottomPanel bottomPanel; // ä��, �¿��� �÷��̾��Ʈ
 	private FrontController controller;
-	private GameModeChanger gameModeChanger;
 
 	public MainPanel() {
 		// TODO Auto-generated constructor stub
 		super();
 	}
 
-	public void init(GameModeChanger gameModeChanger) {
+	public void init() {
 
 		// create Panels
-		controller = FrontController.getInstance();
+		controller = new FrontController();
 		toolboxPanel = new ToolboxPanel();
 		canvasPanel = new CanvasPanel();
 		bottomPanel = new BottomPanel();

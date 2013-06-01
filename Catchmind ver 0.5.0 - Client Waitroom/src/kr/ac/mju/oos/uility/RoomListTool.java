@@ -1,15 +1,18 @@
 package kr.ac.mju.oos.uility;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.util.ArrayList;
-
+import javax.swing.JLabel;
 import javax.swing.JPanel;
-
+import kr.ac.mju.oos.constants.Constants;
 import kr.ac.mju.oos.ui.panels.wait.RoomListPanel;
 
 public class RoomListTool implements Tool {
 
 	private RoomListPanel roomListPanel;
-	private GameModeChanger gameModeChanger;
+
 	private ArrayList<JPanel> roomList;
 	private Room room;
 	private int totalRoomNum;
@@ -22,8 +25,8 @@ public class RoomListTool implements Tool {
 	}
 
 	public void setRoomInfo(String roomName, String gameMode, String itemMode,
-			Object secret, Object person, String roomPassword) {
-		room = new Room(roomName, gameMode, itemMode, secret, person, roomPassword);
+			Object secret, Object person) {
+		room = new Room(roomName, gameMode, itemMode, secret, person);
 		room.setRoomInfo();
 		roomList.add(room);
 		totalRoomNum++;
@@ -55,9 +58,6 @@ public class RoomListTool implements Tool {
 				roomList.get(i).setVisible(false);
 			}
 		}
-	}
-	public void setGameModeChanger(GameModeChanger gameModeChanger) {
-		this.gameModeChanger = gameModeChanger;
 	}
 
 }

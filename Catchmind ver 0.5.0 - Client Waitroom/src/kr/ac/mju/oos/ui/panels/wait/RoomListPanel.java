@@ -13,10 +13,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import kr.ac.mju.oos.constants.Constants;
-import kr.ac.mju.oos.uility.GameModeChanger;
 import kr.ac.mju.oos.uility.RoomListTool;
 
-public class RoomListPanel extends JPanel implements ActionListener {
+public class RoomListPanel extends JPanel implements ActionListener{
 	private static final long serialVersionUID = 1L;
 
 	private JPanel northLabel;
@@ -28,9 +27,7 @@ public class RoomListPanel extends JPanel implements ActionListener {
 	private JButton next;
 
 	private int totalPageNum, currentPageNum;
-	private ArrayList<JPanel> pageList;
-
-	private GameModeChanger gameModeChanger;
+	private ArrayList<JPanel> pageList;;
 
 	public RoomListPanel() {
 		super();
@@ -39,18 +36,16 @@ public class RoomListPanel extends JPanel implements ActionListener {
 		this.setBackground(Constants.DEFAULT_BACKGROUND_COLOR);
 		this.setLayout(new BorderLayout());
 	}
-
-	public void init(GameModeChanger gameModeChanger) {
-		this.gameModeChanger = gameModeChanger;
+	
+	public void init() {
 		pageList = new ArrayList<JPanel>();
 		pageButtonPanel = new JPanel();
 		northLabel = new JPanel();
 		page = new JPanel();
 
-		page.setPreferredSize(new Dimension(Constants.PANELS_RIGHT_WIDTH,
-				Constants.PANELS_PAGE_HEIGHT));
+		page.setPreferredSize(new Dimension(Constants.PANELS_RIGHT_WIDTH,Constants.PANELS_PAGE_HEIGHT));
 		pageList.add(page);
-		totalPageNum++;
+		totalPageNum ++;
 
 		prev = new JButton("prev");
 		next = new JButton("next");
@@ -62,8 +57,7 @@ public class RoomListPanel extends JPanel implements ActionListener {
 		pageButtonPanel.add(next);
 
 		northLabel.add(new JLabel("대기방 목록"));
-		northLabel.setPreferredSize(new Dimension(Constants.PANELS_RIGHT_WIDTH,
-				30));
+		northLabel.setPreferredSize(new Dimension(Constants.PANELS_RIGHT_WIDTH,30));
 
 		this.add(northLabel, BorderLayout.NORTH);
 		this.add(page, BorderLayout.CENTER);
@@ -73,39 +67,38 @@ public class RoomListPanel extends JPanel implements ActionListener {
 		currentPageNum = 1;
 	}
 
-	public void addRoom(JPanel room, int totalRoomNum) {
-		if (totalRoomNum > totalPageNum * Constants.maxRoomNum) {
-			pageList.get(currentPageNum - 1).setVisible(false);
+	public void addRoom (JPanel room, int totalRoomNum) {
+		if(totalRoomNum > totalPageNum*Constants.maxRoomNum){
+			pageList.get(currentPageNum-1).setVisible(false);
 			page = new JPanel();
-			page.setPreferredSize(new Dimension(Constants.PANELS_RIGHT_WIDTH,
-					Constants.PANELS_PAGE_HEIGHT));
+			page.setPreferredSize(new Dimension(Constants.PANELS_RIGHT_WIDTH,Constants.PANELS_PAGE_HEIGHT));
 			pageList.add(page);
 			this.add(page, BorderLayout.CENTER);
-			totalPageNum++;
-			currentPageNum++;
+			totalPageNum ++;
+			currentPageNum ++;
 		}
 		page.add(room);
 		page.updateUI();
 	}
-
+	
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == prev) {
-			if (currentPageNum > 1) {
-				for (int i = 1; i < totalPageNum; i++) {
+		if(e.getSource() == prev){
+			if( currentPageNum > 1){
+				for(int i=1; i<totalPageNum; i++){
 					pageList.get(i).setVisible(false);
 				}
-				currentPageNum--;
-				pageList.get(currentPageNum - 1).setVisible(true);
-				System.out.println("현재 페이지 : " + currentPageNum);
+				currentPageNum --;
+				pageList.get(currentPageNum-1).setVisible(true);
+				System.out.println("현재 페이지 : "+currentPageNum);
 			}
-		} else if (e.getSource() == next) {
-			if (currentPageNum < totalPageNum) {
-				for (int i = 0; i < totalPageNum; i++) {
+		}else if(e.getSource() == next){
+			if( currentPageNum < totalPageNum){
+				for(int i=0; i<totalPageNum; i++){
 					pageList.get(i).setVisible(false);
 				}
-				currentPageNum++;
-				pageList.get(currentPageNum - 1).setVisible(true);
-				System.out.println("현재 페이지 : " + currentPageNum);
+				currentPageNum ++;
+				pageList.get(currentPageNum-1).setVisible(true);
+				System.out.println("현재 페이지 : "+currentPageNum);
 			}
 		}
 		this.updateUI();

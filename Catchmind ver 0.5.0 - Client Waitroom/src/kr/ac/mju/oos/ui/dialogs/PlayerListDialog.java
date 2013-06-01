@@ -11,6 +11,8 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import kr.ac.mju.oos.model.dto.UserDataBean;
+
 
 public class PlayerListDialog extends JDialog {
 	private JLabel jlb,jlbid,jlbrating;
@@ -18,14 +20,14 @@ public class PlayerListDialog extends JDialog {
 	private JPanel content;
 	private ImageIcon player;
 
-	public PlayerListDialog(String str,String id,String rating) {
+	public PlayerListDialog(UserDataBean user) {
 		playerlist = new JPanel(new BorderLayout());
 		content = new JPanel();
 		playerlist.add(content);
 		player = new ImageIcon("picture/missingAvatar.png");	
 		jlb= new JLabel();
-		jlbid=new JLabel(id);
-		jlbrating=new JLabel(rating);
+		jlbid=new JLabel(user.getUserid());
+		jlbrating=new JLabel(user.getSn1());
 		jlb.setIcon(player);
 		jlb.setPreferredSize(new Dimension(200, 40));
 		jlbid.setPreferredSize(new Dimension(205, 40));
